@@ -6,7 +6,7 @@ return [
         ],
         'expected' => [
             'exception' => false,
-            'value' => 'value'
+            'value' => '/path/test/'
         ]
     ],
     'invalidValueShouldRaiseException' => [

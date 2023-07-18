@@ -29,7 +29,7 @@ class Test_setValue extends TestCase {
         parent::set_up();
         $this->value = '';
 
-        $this->folder = Mockery::mock(Folder::class, [$this->value]);
+        $this->folder = new Folder($this->value);
     }
 
     /**
