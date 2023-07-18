@@ -8,6 +8,6 @@ class Folder implements Content
 
     protected function check_validate_rule(string $value): bool
     {
-        return (bool) preg_match('#^(/[^/ ]*)+/?$#', $value);
+        return (bool) preg_match('#^(/[^/. ]*)+/?$#', $value);
     }
 }
