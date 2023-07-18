@@ -8,6 +8,6 @@ class Prefix implements Content
 
     protected function check_validate_rule(string $value): bool
     {
-        // TODO: Implement check_validate_rule() method.
+        return (bool) preg_match('/^([a-zA-Z]_?)+$/', $value);
     }
 }
