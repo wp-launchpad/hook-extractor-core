@@ -63,5 +63,72 @@ return [
             'configurations' => $configurations
         ]
     ],
-
+    'LoadingPathConfigurationNoContentShouldReturnProjectConfiguration' => [
+        'config' => [
+            'project_folder' => '/project/path',
+            'path' => $path,
+            'create_path' => [
+                '/project/path/hook-extractor.yml' => $project_path,
+            ],
+            'exists' => [
+                [
+                    'path' => $path,
+                    'exists' => true
+                ],
+                [
+                    'path' => $project_path,
+                    'exists' => true,
+                ]
+            ],
+            'content' => [
+                [
+                    'path' => $path,
+                    'content' => ''
+                ],
+                [
+                    'path' => $project_path,
+                    'content' => file_get_contents(__DIR__ . '/content.yaml')
+                ]
+            ],
+            'configurations' => $configurations,
+        ],
+        'expected' => [
+            'data' => yaml_parse_file(__DIR__ . '/content.yaml'),
+            'configurations' => $configurations
+        ]
+    ],
+    'LoadingPathConfigurationInvalidYamlShouldReturnProjectConfiguration' => [
+        'config' => [
+            'project_folder' => '/project/path',
+            'path' => $path,
+            'create_path' => [
+                '/project/path/hook-extractor.yml' => $project_path,
+            ],
+            'exists' => [
+                [
+                    'path' => $path,
+                    'exists' => true
+                ],
+                [
+                    'path' => $project_path,
+                    'exists' => true,
+                ]
+            ],
+            'content' => [
+                [
+                    'path' => $path,
+                    'content' => 'aaa'
+                ],
+                [
+                    'path' => $project_path,
+                    'content' => file_get_contents(__DIR__ . '/content.yaml')
+                ]
+            ],
+            'configurations' => $configurations,
+        ],
+        'expected' => [
+            'data' => yaml_parse_file(__DIR__ . '/content.yaml'),
+            'configurations' => $configurations
+        ]
+    ]
 ];

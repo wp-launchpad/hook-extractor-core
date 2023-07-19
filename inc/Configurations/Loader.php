@@ -64,7 +64,13 @@ class Loader
                 continue;
             }
             $content = $this->filesystem->get_content($configuration_path);
+            if( ! $content ) {
+                continue;
+            }
             $yaml = yaml_parse($content);
+            if(! is_array($yaml)) {
+                continue;
+            }
             return $this->factory->make($yaml);
         }
         throw new ConfigurationException();
