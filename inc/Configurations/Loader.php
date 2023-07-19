@@ -2,8 +2,8 @@
 
 namespace WPLaunchpad\HookExtractor\Configurations;
 
-use League\Flysystem\Filesystem;
 use WPLaunchpad\HookExtractor\Entities\Configuration;
+use WPLaunchpad\HookExtractor\Filesystem\FilesystemInterface;
 use WPLaunchpad\HookExtractor\ObjectValues\Folder;
 use WPLaunchpad\HookExtractor\ObjectValues\ObjectValueFactoryInterface;
 use WPLaunchpad\HookExtractor\ObjectValues\Path;
@@ -11,7 +11,7 @@ use WPLaunchpad\HookExtractor\ObjectValues\Path;
 class Loader
 {
     /**
-     * @var Filesystem
+     * @var FilesystemInterface
      */
     protected $filesystem;
 
@@ -36,13 +36,13 @@ class Loader
     protected $app_folder;
 
     /**
-     * @param Filesystem $filesystem
+     * @param FilesystemInterface $filesystem
      * @param FactoryInterface $factory
      * @param ObjectValueFactoryInterface $object_value_factory
      * @param Folder $project_folder
      * @param Folder $app_folder
      */
-    public function __construct(Filesystem $filesystem, FactoryInterface $factory, ObjectValueFactoryInterface $object_value_factory, Folder $project_folder, Folder $app_folder)
+    public function __construct(FilesystemInterface $filesystem, FactoryInterface $factory, ObjectValueFactoryInterface $object_value_factory, Folder $project_folder, Folder $app_folder)
     {
         $this->filesystem = $filesystem;
         $this->factory = $factory;
@@ -52,6 +52,9 @@ class Loader
     }
 
     public function load(Path $path): Configuration {
-        return null;
+        $this->filesystem->exists($path);
+        $content = $this->filesystem->get_content($path);
+        $yaml = yaml_parse($content);
+        return $this->factory->make($yaml);
     }
 }

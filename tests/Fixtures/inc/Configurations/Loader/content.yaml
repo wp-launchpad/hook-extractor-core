@@ -1,0 +1,13 @@
+includes:
+  - inc
+  - classes
+
+excludes:
+  - inc/Dependencies
+  - inc/classes/dependencies
+
+
+
+hooks:
+  excluded:
+    - warpdrive_domain_flush
