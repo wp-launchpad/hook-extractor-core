@@ -52,9 +52,21 @@ class Loader
     }
 
     public function load(Path $path): Configuration {
-        $this->filesystem->exists($path);
-        $content = $this->filesystem->get_content($path);
-        $yaml = yaml_parse($content);
-        return $this->factory->make($yaml);
+
+        $configuration_paths = [
+          $this->object_value_factory->create_path($this->project_folder->get_value() . DIRECTORY_SEPARATOR . 'hook-extractor.yml')
+        ];
+
+        array_unshift($configuration_paths, $path);
+
+        foreach ($configuration_paths as $configuration_path) {
+            if( ! $this->filesystem->exists($configuration_path) ) {
+                continue;
+            }
+            $content = $this->filesystem->get_content($configuration_path);
+            $yaml = yaml_parse($content);
+            return $this->factory->make($yaml);
+        }
+        throw new ConfigurationException();
     }
 }
