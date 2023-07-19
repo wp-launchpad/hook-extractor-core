@@ -3,6 +3,7 @@
 namespace WPLaunchpad\HookExtractor\Tests\Unit\inc\Configurations\Loader;
 
 use Mockery;
+use WPLaunchpad\HookExtractor\Configurations\ConfigurationException;
 use WPLaunchpad\HookExtractor\Configurations\FactoryInterface;
 use WPLaunchpad\HookExtractor\Configurations\Loader;
 use League\Flysystem\Filesystem;
@@ -80,7 +81,12 @@ class Test_load extends TestCase {
             $this->filesystem->expects()->get_content($content['path'])->andReturn($content['content']);
         }
 
-        $this->factory->expects()->make($expected['data'])->andReturn($config['configurations']);
+
+        if($expected['exception']) {
+            $this->expectException(ConfigurationException::class);
+        } else {
+            $this->factory->expects()->make($expected['data'])->andReturn($config['configurations']);
+        }
 
         $this->assertSame($expected['configurations'], $this->loader->load($config['path']));
     }

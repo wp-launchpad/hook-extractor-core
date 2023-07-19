@@ -34,6 +34,7 @@ return [
         ],
         'expected' => [
             'data' => yaml_parse_file(__DIR__ . '/content.yaml'),
+            'exception' => false,
             'configurations' => $configurations
         ]
     ],
@@ -66,6 +67,7 @@ return [
         ],
         'expected' => [
             'data' => yaml_parse_file(__DIR__ . '/content.yaml'),
+            'exception' => false,
             'configurations' => $configurations
         ]
     ],
@@ -102,6 +104,7 @@ return [
         ],
         'expected' => [
             'data' => yaml_parse_file(__DIR__ . '/content.yaml'),
+            'exception' => false,
             'configurations' => $configurations
         ]
     ],
@@ -138,6 +141,7 @@ return [
         ],
         'expected' => [
             'data' => yaml_parse_file(__DIR__ . '/content.yaml'),
+            'exception' => false,
             'configurations' => $configurations
         ]
     ],
@@ -174,6 +178,40 @@ return [
         ],
         'expected' => [
             'data' => yaml_parse_file(__DIR__ . '/content.yaml'),
+            'exception' => false,
+            'configurations' => $configurations
+        ]
+    ],
+    'LoadingAppPathConfigurationNotExistingShouldThrowException' => [
+        'config' => [
+            'project_folder' => '/project/path',
+            'app_folder' => '/app/path',
+            'path' => $path,
+            'create_path' => [
+                '/project/path/hook-extractor.yml' => $project_path,
+                '/app/path/configs/default.yml' => $app_path,
+            ],
+            'exists' => [
+                [
+                    'path' => $path,
+                    'exists' => false
+                ],
+                [
+                    'path' => $project_path,
+                    'exists' => false,
+                ],
+                [
+                    'path' => $app_path,
+                    'exists' => false,
+                ],
+            ],
+            'content' => [
+            ],
+            'configurations' => $configurations,
+        ],
+        'expected' => [
+            'data' => yaml_parse_file(__DIR__ . '/content.yaml'),
+            'exception' => true,
             'configurations' => $configurations
         ]
     ],
