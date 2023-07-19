@@ -31,7 +31,7 @@ class Configuration
     /**
      * @return Folder[]
      */
-    public function getFolders(): array
+    public function get_folders(): array
     {
         return $this->folders;
     }
@@ -39,7 +39,7 @@ class Configuration
     /**
      * @param Folder[] $folders
      */
-    public function setFolders(array $folders): void
+    public function set_folders(array $folders): void
     {
         $this->folders = $folders;
     }
@@ -47,7 +47,7 @@ class Configuration
     /**
      * @return Content[]
      */
-    public function getExclusions(): array
+    public function get_exclusions(): array
     {
         return $this->exclusions;
     }
@@ -55,7 +55,7 @@ class Configuration
     /**
      * @param Content[] $exclusions
      */
-    public function setExclusions(array $exclusions): void
+    public function set_exclusions(array $exclusions): void
     {
         $this->exclusions = $exclusions;
     }
@@ -63,7 +63,7 @@ class Configuration
     /**
      * @return Prefix[]
      */
-    public function getPrefixes(): array
+    public function get_prefixes(): array
     {
         return $this->prefixes;
     }
@@ -71,7 +71,7 @@ class Configuration
     /**
      * @param Prefix[] $prefixes
      */
-    public function setPrefixes(array $prefixes): void
+    public function set_prefixes(array $prefixes): void
     {
         $this->prefixes = $prefixes;
     }
