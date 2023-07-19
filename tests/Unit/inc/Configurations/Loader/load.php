@@ -66,6 +66,7 @@ class Test_load extends TestCase {
     {
 
         $this->project_folder->allows()->get_value()->andReturn($config['project_folder']);
+        $this->app_folder->allows()->get_value()->andReturn($config['app_folder']);
 
         foreach ($config['create_path'] as $path => $instance) {
             $this->object_value_factory->expects()->create_path($path)->andReturn($instance);

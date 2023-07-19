@@ -54,7 +54,8 @@ class Loader
     public function load(Path $path): Configuration {
 
         $configuration_paths = [
-          $this->object_value_factory->create_path($this->project_folder->get_value() . DIRECTORY_SEPARATOR . 'hook-extractor.yml')
+          $this->object_value_factory->create_path($this->project_folder->get_value() . DIRECTORY_SEPARATOR . 'hook-extractor.yml'),
+          $this->object_value_factory->create_path($this->app_folder->get_value() . DIRECTORY_SEPARATOR . 'configs/default.yml'),
         ];
 
         array_unshift($configuration_paths, $path);
