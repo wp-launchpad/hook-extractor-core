@@ -29,11 +29,7 @@ class Factory implements FactoryInterface
         }
         $configuration->set_folders($folders);
 
-        $excludes = [];
-        foreach ($data['excludes'] as $exclude) {
-            $excludes []= $this->object_value_factory->create_path($exclude);
-        }
-        $configuration->set_exclusions($excludes);
+        $configuration->set_exclusions($this->fetch_excludes($data));
 
         $prefixes = [];
         foreach ($data['hooks']['prefix'] as $prefix) {
@@ -48,5 +44,18 @@ class Factory implements FactoryInterface
         $configuration->set_hook_excluded($excludeds);
 
         return $configuration;
+    }
+
+    protected function fetch_excludes(array $data): array {
+        if(! key_exists('excludes', $data)) {
+            return [];
+        }
+
+        $excludes = [];
+        foreach ($data['excludes'] as $exclude) {
+            $excludes []= $this->object_value_factory->create_path($exclude);
+        }
+
+        return $excludes;
     }
 }

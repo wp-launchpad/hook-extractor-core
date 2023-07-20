@@ -68,5 +68,49 @@ return [
             ]
         ]
     ],
+    'MissingExcludesReturnConfiguredInstance' => [
+        'config' => [
+            'data' => [
+                'includes' => [
+                    'inc',
+                    'classes',
+                ],
+                'hooks' => [
+                    'prefix' => [
+                        'rocket_',
+                        'launcher_'
+                    ],
+                    'excluded' => [
+                        'excluded_',
+                    ]
+                ]
+            ],
+            'folders' => [
+                'inc' => $inc_folder,
+                'classes' => $classes_folder,
+            ],
+            'paths' => [],
+            'prefixes' => [
+                'rocket_' => $rocket_prefix,
+                'launcher_' => $launcher_prefix,
+                'excluded_' => $excluded_prefix
+            ],
+        ],
+        'expected' => [
+            'folders' => [
+                $inc_folder,
+                $classes_folder,
+            ],
+            'exclusions' => [
+            ],
+            'prefixes' => [
+                $rocket_prefix,
+                $launcher_prefix,
+            ],
+            'hook_excluded' => [
+                $excluded_prefix,
+            ]
+        ]
+    ],
 
 ];
