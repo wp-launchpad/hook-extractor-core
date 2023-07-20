@@ -11,22 +11,22 @@ class Configuration
     /**
      * @var Folder[]
      */
-    protected $folders;
+    protected $folders = [];
 
     /**
      * @var Content[]
      */
-    protected $exclusions;
+    protected $exclusions = [];
 
     /**
      * @var Prefix[]
      */
-    protected $prefixes;
+    protected $prefixes = [];
 
     /**
      * @var Prefix[]
      */
-    protected $hook_excluded;
+    protected $hook_excluded = [];
 
     /**
      * @return Folder[]

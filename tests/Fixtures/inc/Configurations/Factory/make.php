@@ -15,7 +15,7 @@ $launcher_prefix = new Prefix('launcher_');
 $excluded_prefix = new Prefix('excluded_');
 
 return [
-    'FullDataShouldReturnConfiguredInstance' => [
+    'fullDataShouldReturnConfiguredInstance' => [
         'config' => [
               'data' => [
                   'includes' => [
@@ -68,7 +68,7 @@ return [
             ]
         ]
     ],
-    'MissingExcludesReturnConfiguredInstance' => [
+    'missingExcludesReturnConfiguredInstance' => [
         'config' => [
             'data' => [
                 'includes' => [
@@ -151,6 +151,87 @@ return [
             'prefixes' => [
                 $rocket_prefix,
                 $launcher_prefix,
+            ],
+            'hook_excluded' => [
+                $excluded_prefix,
+            ]
+        ]
+    ],
+    'missingHooksShouldReturnConfiguredInstance' => [
+        'config' => [
+            'data' => [
+                'includes' => [
+                    'inc',
+                    'classes',
+                ],
+                'excludes' => [
+                    'inc/Dependencies',
+                    'inc/classes/dependencies',
+                ],
+            ],
+            'folders' => [
+                'inc' => $inc_folder,
+                'classes' => $classes_folder,
+            ],
+            'paths' => [
+                'inc/Dependencies' => $inc_path,
+                'inc/classes/dependencies' => $classes_path,
+            ],
+            'prefixes' => [
+            ],
+        ],
+        'expected' => [
+            'folders' => [
+                $inc_folder,
+                $classes_folder,
+            ],
+            'exclusions' => [
+                $inc_path,
+                $classes_path,
+            ],
+            'prefixes' => [],
+            'hook_excluded' => []
+        ]
+    ],
+    'missingHookPrefixShouldReturnConfiguredInstance' => [
+        'config' => [
+            'data' => [
+                'includes' => [
+                    'inc',
+                    'classes',
+                ],
+                'excludes' => [
+                    'inc/Dependencies',
+                    'inc/classes/dependencies',
+                ],
+                'hooks' => [
+                    'excluded' => [
+                        'excluded_',
+                    ]
+                ]
+            ],
+            'folders' => [
+                'inc' => $inc_folder,
+                'classes' => $classes_folder,
+            ],
+            'paths' => [
+                'inc/Dependencies' => $inc_path,
+                'inc/classes/dependencies' => $classes_path,
+            ],
+            'prefixes' => [
+                'excluded_' => $excluded_prefix
+            ],
+        ],
+        'expected' => [
+            'folders' => [
+                $inc_folder,
+                $classes_folder,
+            ],
+            'exclusions' => [
+                $inc_path,
+                $classes_path,
+            ],
+            'prefixes' => [
             ],
             'hook_excluded' => [
                 $excluded_prefix,
