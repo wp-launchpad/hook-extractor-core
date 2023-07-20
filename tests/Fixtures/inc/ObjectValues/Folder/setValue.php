@@ -9,6 +9,15 @@ return [
             'value' => '/path/test/'
         ]
     ],
+    'validValueWithoutSlashShouldReturnSame' => [
+        'config' => [
+            'value' => 'path',
+        ],
+        'expected' => [
+            'exception' => false,
+            'value' => 'path'
+        ]
+    ],
     'fileShouldRaiseException' => [
         'config' => [
             'value' => '/path/test/test.php',
@@ -18,13 +27,13 @@ return [
             'value' => '/path/test/test.php'
         ]
     ],
-    'invalidValueShouldRaiseException' => [
+    'invalidValueShouldReturnSame' => [
         'config' => [
             'value' => 'valué',
         ],
         'expected' => [
-            'exception' => true,
-            'value' => 'value'
+            'exception' => false,
+            'value' => 'valué'
         ]
     ],
 
