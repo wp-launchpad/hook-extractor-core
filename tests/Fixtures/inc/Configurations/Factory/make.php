@@ -112,5 +112,49 @@ return [
             ]
         ]
     ],
-
+    'missingIncludesShouldReturnConfiguredInstance' => [
+        'config' => [
+            'data' => [
+                'excludes' => [
+                    'inc/Dependencies',
+                    'inc/classes/dependencies',
+                ],
+                'hooks' => [
+                    'prefix' => [
+                        'rocket_',
+                        'launcher_'
+                    ],
+                    'excluded' => [
+                        'excluded_',
+                    ]
+                ]
+            ],
+            'folders' => [
+            ],
+            'paths' => [
+                'inc/Dependencies' => $inc_path,
+                'inc/classes/dependencies' => $classes_path,
+            ],
+            'prefixes' => [
+                'rocket_' => $rocket_prefix,
+                'launcher_' => $launcher_prefix,
+                'excluded_' => $excluded_prefix
+            ],
+        ],
+        'expected' => [
+            'folders' => [
+            ],
+            'exclusions' => [
+                $inc_path,
+                $classes_path,
+            ],
+            'prefixes' => [
+                $rocket_prefix,
+                $launcher_prefix,
+            ],
+            'hook_excluded' => [
+                $excluded_prefix,
+            ]
+        ]
+    ],
 ];

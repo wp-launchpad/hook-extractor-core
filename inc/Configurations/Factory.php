@@ -23,11 +23,8 @@ class Factory implements FactoryInterface
     public function make(array $data): Configuration
     {
         $configuration = new Configuration();
-        $folders = [];
-        foreach ($data['includes'] as $include) {
-            $folders [] = $this->object_value_factory->create_folder($include);
-        }
-        $configuration->set_folders($folders);
+
+        $configuration->set_folders($this->fetch_includes($data));
 
         $configuration->set_exclusions($this->fetch_excludes($data));
 
@@ -44,6 +41,19 @@ class Factory implements FactoryInterface
         $configuration->set_hook_excluded($excludeds);
 
         return $configuration;
+    }
+
+    protected function fetch_includes(array $data): array {
+        if(! key_exists('includes', $data)) {
+            return [];
+        }
+
+        $folders = [];
+        foreach ($data['includes'] as $include) {
+            $folders [] = $this->object_value_factory->create_folder($include);
+        }
+
+        return $folders;
     }
 
     protected function fetch_excludes(array $data): array {
