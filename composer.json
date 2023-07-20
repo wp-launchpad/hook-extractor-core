@@ -12,5 +12,9 @@
   "require-dev": {
     "wp-media/phpunit": "^3.0",
     "wp-launchpad/cli": "^1.1"
+  },
+  "require": {
+    "microsoft/tolerant-php-parser": "^0.1.2",
+    "jasny/phpdoc-parser": "^1.0"
   }
 }
