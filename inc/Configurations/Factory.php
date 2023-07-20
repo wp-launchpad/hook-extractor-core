@@ -34,11 +34,8 @@ class Factory implements FactoryInterface
 
         $configuration->set_prefixes($this->fetch_prefix($data));
 
-        $excludeds = [];
-        foreach ($data['hooks']['excluded'] as $excluded) {
-            $excludeds []= $this->object_value_factory->create_prefix($excluded);
-        }
-        $configuration->set_hook_excluded($excludeds);
+
+        $configuration->set_hook_excluded($this->fetch_excluded($data));
 
         return $configuration;
     }
@@ -76,6 +73,19 @@ class Factory implements FactoryInterface
 
         $prefixes = [];
         foreach ($data['hooks']['prefix'] as $prefix) {
+            $prefixes [] = $this->object_value_factory->create_prefix($prefix);
+        }
+
+        return $prefixes;
+    }
+
+    protected function fetch_excluded(array $data): array {
+        if(! key_exists('hooks', $data) || ! key_exists('excluded', $data['hooks'])) {
+            return [];
+        }
+
+        $prefixes = [];
+        foreach ($data['hooks']['excluded'] as $prefix) {
             $prefixes [] = $this->object_value_factory->create_prefix($prefix);
         }
 
