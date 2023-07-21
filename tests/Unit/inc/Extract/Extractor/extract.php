@@ -50,7 +50,22 @@ class Test_extract extends TestCase {
      */
     public function testShouldReturnAsExpected( $config, $expected )
     {
-        $this->assertSame($expected['results'], $this->extractor->extract($config['configuration']));
+        foreach ($config['exists'] as $exist) {
+            $this->filesystem->expects()->exists($exist['path'])->andReturn($exist['exists']);
+        }
 
+        foreach ($config['list'] as $list) {
+            $this->filesystem->expects()->list($list['path'])->andReturn($list['listing']);
+        }
+
+        foreach ($config['content'] as $content) {
+            $this->filesystem->expects()->get_content($content['path'])->andReturn($content['content']);
+        }
+
+        foreach ($config['parse'] as $content => $parsed) {
+            $this->parser->expects()->parseSourceFile($content)->andReturn($parsed);
+        }
+
+        $this->assertSame($expected['results'], $this->extractor->extract($config['configuration']));
     }
 }
