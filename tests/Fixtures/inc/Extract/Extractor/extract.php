@@ -33,7 +33,8 @@ return [
             'content' => [
             ],
             'parse' => [
-            ]
+            ],
+            'docblock' => []
         ],
         'expected' => [
             'results' => []
@@ -67,6 +68,26 @@ return [
             ],
             'parse' => [
                 $content => $node
+            ],
+            'docblock' => [
+                [
+                    'block' => '/**
+         * Before an order succeed.
+         * @param int $order_id Order ID.
+         */',
+                    'output' => [
+                        'description' => 'Before an order succeed.',
+                    ]
+                ],
+                [
+                    'block' => '/**
+         * After an order succeed.
+         * @param int $order_id Order ID.
+         */',
+                    'output' => [
+                        'description' => 'After an order succeed.',
+                    ]
+                ],
             ]
         ],
         'expected' => [
@@ -77,9 +98,10 @@ return [
                     'files' => [
                         [
                             'path' => 'inc/file.php',
-                            'line' => 61
+                            'line' => 64
                         ]
-                    ]
+                    ],
+                    'description' => 'Before an order succeed.',
                 ],
                 [
                     'type' => 'action',
@@ -87,9 +109,10 @@ return [
                     'files' => [
                         [
                             'path' => 'inc/file.php',
-                            'line' => 68
+                            'line' => 74
                         ]
-                    ]
+                    ],
+                    'description' => 'After an order succeed.',
                 ],
                 [
                         'type' => 'action',
@@ -97,7 +120,7 @@ return [
                         'files' => [
                             [
                                 'path' => 'inc/file.php',
-                                'line' => 82
+                                'line' => 88
                             ]
                         ]
                 ],
@@ -108,7 +131,7 @@ return [
                         'files' => [
                             [
                                 'path' => 'inc/file.php',
-                                'line' => 91
+                                'line' => 97
                             ]
                         ]
                 ],
@@ -119,7 +142,7 @@ return [
                         'files' => [
                             [
                                 'path' => 'inc/file.php',
-                                'line' => 105
+                                'line' => 111
                             ]
                         ]
                 ],
@@ -129,7 +152,7 @@ return [
                         'files' => [
                             [
                                 'path' => 'inc/file.php',
-                                'line' => 107
+                                'line' => 113
                             ]
                         ]
                 ],
@@ -139,7 +162,7 @@ return [
                         'files' => [
                             [
                                 'path' => 'inc/file.php',
-                                'line' => 117
+                                'line' => 123
                             ]
                         ]
                 ],
@@ -149,7 +172,7 @@ return [
                         'files' => [
                             [
                                 'path' => 'inc/file.php',
-                                'line' => 123
+                                'line' => 129
                             ]
                         ]
                 ],
@@ -159,7 +182,7 @@ return [
                         'files' => [
                             [
                                 'path' => 'inc/file.php',
-                                'line' => 150
+                                'line' => 156
                             ]
                         ]
                 ],
@@ -169,7 +192,7 @@ return [
                         'files' => [
                             [
                                 'path' => 'inc/file.php',
-                                'line' => 169
+                                'line' => 175
                             ]
                         ]
                 ],
@@ -179,7 +202,7 @@ return [
                         'files' => [
                             [
                                 'path' => 'inc/file.php',
-                                'line' => 186
+                                'line' => 192
                             ]
                         ]
                 ],
@@ -189,11 +212,36 @@ return [
                         'files' => [
                             [
                                 'path' => 'inc/file.php',
-                                'line' => 208
+                                'line' => 214
                             ]
                         ]
                 ]
             ]
         ]
-    ]
+    ],
+    'FoldersNotExistShouldReturnEmpty' => [
+        'config' => [
+            'configuration' => $folders_configuration,
+            'exists' => [
+                [
+                    'path' => $inc_folder,
+                    'exists' => false,
+                ]
+            ],
+            'list' => [
+            ],
+            'content' => [
+
+            ],
+            'parse' => [
+
+            ],
+            'docblock' => []
+        ],
+        'expected' => [
+            'results' => [
+
+            ]
+        ]
+    ],
 ];

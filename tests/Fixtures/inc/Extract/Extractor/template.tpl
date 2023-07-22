@@ -57,14 +57,20 @@ class GatewaySubscriber implements SubscriberInterface
         }
 
         $order_id = (int) $_GET["{$this->prefix}order_ref"];
-
+        /**
+         * Before an order succeed.
+         * @param int $order_id Order ID.
+         */
         do_action("{$this->prefix}success_order_before", $order_id);
 
         $order = wc_get_order($order_id);
         if(! $order) {
             return ;
         }
-
+        /**
+         * After an order succeed.
+         * @param int $order_id Order ID.
+         */
         do_action("{$this->prefix}success_order_after", $order_id);
 
         wp_redirect($this->gateway->get_return_url( $order ));

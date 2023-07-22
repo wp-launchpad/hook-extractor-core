@@ -66,6 +66,10 @@ class Test_extract extends TestCase {
             $this->parser->expects()->parseSourceFile($content)->andReturn($parsed);
         }
 
+        foreach ($config['docblock'] as $docblock) {
+            $this->doc_parser->expects()->parse($docblock['block'])->andReturn($docblock['output']);
+        }
+
         $this->assertSame($expected['results'], $this->extractor->extract($config['configuration']));
     }
 }

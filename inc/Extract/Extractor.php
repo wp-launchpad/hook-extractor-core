@@ -2,8 +2,11 @@
 
 namespace WPLaunchpad\HookExtractor\Extract;
 
+use Jasny\PhpdocParser\PhpdocException;
 use Jasny\PhpdocParser\PhpdocParser;
+use Microsoft\PhpParser\Node;
 use Microsoft\PhpParser\Node\Expression\CallExpression;
+use Microsoft\PhpParser\Node\Statement\ExpressionStatement;
 use Microsoft\PhpParser\Parser;
 use WPLaunchpad\HookExtractor\Entities\Configuration;
 use WPLaunchpad\HookExtractor\Filesystem\FilesystemInterface;
@@ -69,6 +72,10 @@ class Extractor
                             ],
                         ];
 
+
+                        $data = $this->get_doc_node($child_node);
+                        $extract = array_merge( $extract, $data );
+
                         $extracts [] = $extract;
                     }
                     if ( $child_node instanceof CallExpression && $child_node->callableExpression->getText() === 'apply_filters') {
@@ -91,6 +98,9 @@ class Extractor
                             ],
                         ];
 
+                        $data = $this->get_doc_node($child_node);
+                        $extract = array_merge( $extract, $data );
+
                         $extracts [] = $extract;
                     }
                 }
@@ -104,5 +114,25 @@ class Extractor
         $content = preg_replace('/\R/u', "\n", $content);
         $content = substr($content, 0, $position);
         return substr_count( $content, "\n" ) + 1;
+    }
+
+    protected function get_doc_node(Node $node): array {
+        while ($node && ! $node instanceof ExpressionStatement) {
+            $children = $node->getChildNodes();
+            foreach ($children as $child) {
+                $doc = $child->getDocCommentText();
+                if($doc) {
+                    try {
+                        return $this->doc_parser->parse($doc);
+                    } catch (PhpdocException $exception) {
+                        return [];
+                    }
+                }
+            }
+
+            $node = $node->getParent();
+        }
+
+        return [];
     }
 }
