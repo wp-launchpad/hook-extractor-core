@@ -55,7 +55,7 @@ class Test_extract extends TestCase {
         }
 
         foreach ($config['list'] as $list) {
-            $this->filesystem->expects()->list($list['path'])->andReturn($list['listing']);
+            $this->filesystem->expects()->list($list['path'], true)->andReturn($list['listing']);
         }
 
         foreach ($config['content'] as $content) {

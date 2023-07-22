@@ -25,16 +25,8 @@ return [
         'config' => [
               'configuration' => $configuration,
               'exists' => [
-                  [
-                      'path' => $inc_folder,
-                      'exists' => true,
-                  ]
               ],
               'list' => [
-                  [
-                      'path' => $inc_folder,
-                      'listing' => []
-                  ]
               ],
             'content' => [
             ],
@@ -77,7 +69,128 @@ return [
         ],
         'expected' => [
             'results' => [
+                [
+                    'type' => 'action',
+                    'name' => '{$this->prefix}success_order_before',
+                    'files' => [
+                        [
+                            'path' => 'inc/file.php',
+                            'line' => 61
+                        ]
+                    ]
+                ],
+                [
+                    'type' => 'action',
+                    'name' => '{$this->prefix}success_order_after',
+                    'files' => [
+                        [
+                            'path' => 'inc/file.php',
+                            'line' => 68
+                        ]
+                    ]
+                ],
+                [
+                        'type' => 'action',
+                        'name' => '{$this->prefix}error_order_before',
+                        'files' => [
+                            [
+                                'path' => 'inc/file.php',
+                                'line' => 82
+                            ]
+                        ]
+                ],
 
+                [
+                        'type' => 'action',
+                        'name' => '{$this->prefix}error_order_after',
+                        'files' => [
+                            [
+                                'path' => 'inc/file.php',
+                                'line' => 91
+                            ]
+                        ]
+                ],
+
+                [
+                        'type' => 'action',
+                        'name' => '{$this->prefix}process_request_order_before',
+                        'files' => [
+                            [
+                                'path' => 'inc/file.php',
+                                'line' => 105
+                            ]
+                        ]
+                ],
+                [
+                        'type' => 'action',
+                        'name' => '{$this->prefix}process_request_order_after',
+                        'files' => [
+                            [
+                                'path' => 'inc/file.php',
+                                'line' => 107
+                            ]
+                        ]
+                ],
+                [
+                        'type' => 'action',
+                        'name' => '{$this->prefix}process_order_before',
+                        'files' => [
+                            [
+                                'path' => 'inc/file.php',
+                                'line' => 117
+                            ]
+                        ]
+                ],
+                [
+                        'type' => 'filter',
+                        'name' => '{$this->prefix}purchase_request_data',
+                        'files' => [
+                            [
+                                'path' => 'inc/file.php',
+                                'line' => 123
+                            ]
+                        ]
+                ],
+                [
+                    'type' => 'filter',
+                        'name' => '{$this->prefix}billing_address_data',
+                        'files' => [
+                            [
+                                'path' => 'inc/file.php',
+                                'line' => 150
+                            ]
+                        ]
+                ],
+                [
+                        'type' => 'filter',
+                        'name' => '{$this->prefix}shipping_address_data',
+                        'files' => [
+                            [
+                                'path' => 'inc/file.php',
+                                'line' => 169
+                            ]
+                        ]
+                ],
+                [
+                        'type' => 'filter',
+                        'name' => '{$this->prefix}client_data',
+                        'files' => [
+                            [
+                                'path' => 'inc/file.php',
+                                'line' => 186
+                            ]
+                        ]
+                ],
+                [
+                        'type' => 'action',
+                        'name' => '{$this->prefix}process_order_after',
+                        'files' => [
+                            [
+                                'path' => 'inc/file.php',
+                                'line' => 208
+                            ]
+                        ]
+                ]
             ]
         ]
     ]
