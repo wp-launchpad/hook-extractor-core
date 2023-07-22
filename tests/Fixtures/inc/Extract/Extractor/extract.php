@@ -18,7 +18,9 @@ $folders_configuration->set_folders([
 
 $parser = new Parser();
 
-$node = $parser->parseSourceFile(file_get_contents(__DIR__ . '/template.tpl'));
+$content = file_get_contents(__DIR__ . '/template.tpl');
+
+$node = $parser->parseSourceFile($content);
 
 return [
     'notFolderShouldReturnEmpty' => [
@@ -60,11 +62,11 @@ return [
             'content' => [
                 [
                     'path' => $file_path,
-                    'content' => 'content'
+                    'content' => $content
                 ],
             ],
             'parse' => [
-                'content' => $node
+                $content => $node
             ]
         ],
         'expected' => [

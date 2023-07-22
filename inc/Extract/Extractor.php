@@ -64,7 +64,7 @@ class Extractor
                             'files' => [
                                 [
                                     'path' => $path['path']->get_value(),
-                                    'line' => $child_node->getStartPosition(),
+                                    'line' => $this->find_line($child_node->getStartPosition(), $content),
                                 ]
                             ],
                         ];
@@ -86,7 +86,7 @@ class Extractor
                             'files' => [
                                 [
                                     'path' => $path['path']->get_value(),
-                                    'line' => $child_node->getStartPosition(),
+                                    'line' => $this->find_line($child_node->getStartPosition(), $content),
                                 ]
                             ],
                         ];
@@ -97,5 +97,12 @@ class Extractor
             }
         }
         return $extracts;
+    }
+
+    protected function find_line(int $position, string $content) {
+
+        $content = preg_replace('/\R/u', "\n", $content);
+        $content = substr($content, 0, $position);
+        return substr_count( $content, "\n" ) + 1;
     }
 }
