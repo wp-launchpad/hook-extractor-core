@@ -2,6 +2,7 @@
 
 namespace WPLaunchpad\HookExtractor\Extract;
 
+use Exception;
 use Jasny\PhpdocParser\PhpdocException;
 use Jasny\PhpdocParser\PhpdocParser;
 use Microsoft\PhpParser\Node;
@@ -14,24 +15,32 @@ use WPLaunchpad\HookExtractor\Filesystem\FilesystemInterface;
 class Extractor
 {
     /**
+     * PHP Parser.
+     *
      * @var Parser
      */
     protected $parser;
 
     /**
+     * Docblock parser.
+     *
      * @var PhpdocParser
      */
     protected $doc_parser;
 
     /**
+     * Filesystem.
+     *
      * @var FilesystemInterface
      */
     protected $filesystem;
 
     /**
-     * @param Parser $parser
-     * @param PhpdocParser $doc_parser
-     * @param FilesystemInterface $filesystem
+     * Instantiate the extractor.
+     *
+     * @param Parser $parser PHP Parser.
+     * @param PhpdocParser $doc_parser Docblock parser.
+     * @param FilesystemInterface $filesystem Filesystem.
      */
     public function __construct(Parser $parser, PhpdocParser $doc_parser, FilesystemInterface $filesystem)
     {
@@ -40,6 +49,13 @@ class Extractor
         $this->filesystem = $filesystem;
     }
 
+    /**
+     * Extract hooks.
+     *
+     * @param Configuration $configuration Hook extractor configurations.
+     * @return array
+     * @throws Exception
+     */
     public function extract(Configuration $configuration): array {
         $folders = $configuration->get_folders();
         $extracts = [];
@@ -109,6 +125,13 @@ class Extractor
         return $extracts;
     }
 
+    /**
+     * Find the line number from a position.
+     *
+     * @param int $position Position to set the line number for.
+     * @param string $content Content to search lines in.
+     * @return int
+     */
     protected function find_line(int $position, string $content) {
 
         $content = preg_replace('/\R/u', "\n", $content);
@@ -116,6 +139,12 @@ class Extractor
         return substr_count( $content, "\n" ) + 1;
     }
 
+    /**
+     * Get the docblock of the node.
+     *
+     * @param Node $node Node to search on.
+     * @return array
+     */
     protected function get_doc_node(Node $node): array {
         while ($node && ! $node instanceof ExpressionStatement) {
             $children = $node->getChildNodes();

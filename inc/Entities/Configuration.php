@@ -9,26 +9,36 @@ use WPLaunchpad\HookExtractor\ObjectValues\Prefix;
 class Configuration
 {
     /**
+     * Folders to scan.
+     *
      * @var Folder[]
      */
     protected $folders = [];
 
     /**
+     * Excluded contents.
+     *
      * @var Content[]
      */
     protected $exclusions = [];
 
     /**
+     * Prefixes to scan.
+     *
      * @var Prefix[]
      */
     protected $prefixes = [];
 
     /**
+     * Prefixes to exclude.
+     *
      * @var Prefix[]
      */
     protected $hook_excluded = [];
 
     /**
+     * Get folders to scan.
+     *
      * @return Folder[]
      */
     public function get_folders(): array
@@ -37,6 +47,8 @@ class Configuration
     }
 
     /**
+     * Set folders to scan.
+     *
      * @param Folder[] $folders
      */
     public function set_folders(array $folders): void
@@ -45,6 +57,8 @@ class Configuration
     }
 
     /**
+     * Get folders to exclude.
+     *
      * @return Content[]
      */
     public function get_exclusions(): array
@@ -53,6 +67,8 @@ class Configuration
     }
 
     /**
+     * Set folders to exclude.
+     *
      * @param Content[] $exclusions
      */
     public function set_exclusions(array $exclusions): void
@@ -61,6 +77,8 @@ class Configuration
     }
 
     /**
+     * Get prefix to scan.
+     *
      * @return Prefix[]
      */
     public function get_prefixes(): array
@@ -69,6 +87,8 @@ class Configuration
     }
 
     /**
+     * Set prefix to scan.
+     *
      * @param Prefix[] $prefixes
      */
     public function set_prefixes(array $prefixes): void
@@ -77,6 +97,8 @@ class Configuration
     }
 
     /**
+     * Get excluded prefixes.
+     *
      * @return Prefix[]
      */
     public function get_hook_excluded(): array
@@ -85,6 +107,8 @@ class Configuration
     }
 
     /**
+     * Set excluded prefixes.
+     *
      * @param Prefix[] $hook_excluded
      */
     public function set_hook_excluded(array $hook_excluded): void

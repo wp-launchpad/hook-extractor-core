@@ -44,5 +44,12 @@ trait ObjectValueTrait
         }
     }
 
+    /**
+     * Validate the value against the rule.
+     *
+     * @param string $value Value to check.
+     *
+     * @return bool
+     */
     abstract protected function check_validate_rule(string $value): bool;
 }

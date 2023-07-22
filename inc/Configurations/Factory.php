@@ -8,18 +8,28 @@ use WPLaunchpad\HookExtractor\ObjectValues\ObjectValueFactoryInterface;
 class Factory implements FactoryInterface
 {
     /**
+     * ObjectValue factory.
+     *
      * @var ObjectValueFactoryInterface
      */
     protected $object_value_factory;
 
     /**
-     * @param ObjectValueFactoryInterface $object_value_factory
+     * Instantiate Factory.
+     *
+     * @param ObjectValueFactoryInterface $object_value_factory ObjectValue factory.
      */
     public function __construct(ObjectValueFactoryInterface $object_value_factory)
     {
         $this->object_value_factory = $object_value_factory;
     }
 
+    /**
+     * Make configuration.
+     *
+     * @param array $data Data from configuration.
+     * @return Configuration
+     */
     public function make(array $data): Configuration
     {
         $configuration = new Configuration();

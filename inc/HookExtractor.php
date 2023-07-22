@@ -14,17 +14,23 @@ class HookExtractor
 {
 
     /**
+     * Filesystem.
+     *
      * @var FilesystemInterface
      */
     protected $filesystem;
 
     /**
+     * Hook extractor.
+     *
      * @var Extractor
      */
     protected $extractor;
 
     /**
-     * @param FilesystemInterface $filesystem
+     * Instantiate facade.
+     *
+     * @param FilesystemInterface $filesystem Filesystem.
      */
     public function __construct(FilesystemInterface $filesystem, PhpdocParser $php_parser = null, Parser $docblock_parser = null)
     {
@@ -39,6 +45,13 @@ class HookExtractor
     }
 
 
+    /**
+     * Extract hooks.
+     *
+     * @param Configuration $configuration Extractor configurations.
+     *
+     * @return array
+     */
     public function extract(Configuration $configuration): array {
         return $this->extractor->extract($configuration);
     }
