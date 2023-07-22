@@ -1,4 +1,15 @@
 {
+  "name": "wp-launchpad/hook-extractor-core",
+  "description": "Extract hook from plugin",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "type": "library",
+  "authors": [
+    {
+      "name": "coquardcyr",
+      "email": "coquardcyr@gmail.com"
+    }
+  ],
   "autoload": {
     "psr-4": {
       "WPLaunchpad\\HookExtractor\\": "inc/"
